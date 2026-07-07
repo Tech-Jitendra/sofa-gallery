@@ -1,94 +1,81 @@
-import React, {
-    createContext,
-    useContext,
-    useState
-} from "react";
+import React from "react";
 
 import {
-    darkTheme,
-    lightTheme
+  createContext,
+  useContext,
+} from "react";
+
+
+import {
+  darkTheme,
+  lightTheme
 } from "./themes";
 
 
-type ThemeContextType = {
+import {
+  useThemeStore
+} from "@/store";
 
-  theme:
-  typeof lightTheme;
-
-  toggleTheme:()=>void;
-
-};
 
 
 const ThemeContext =
-createContext<ThemeContextType | null>(null);
+  createContext<any>(null);
 
 
 
 export function ThemeProvider({
   children
-}:{
-  children:React.ReactNode;
-}){
+}: {
+  children: React.ReactNode;
+}) {
 
 
-const [isDark,setIsDark]
-=
-useState(false);
+  const {
+    dark,
+    toggleTheme
+  }
+    =
+    useThemeStore();
 
 
 
-function toggleTheme(){
+  return (
 
- setIsDark(prev=>!prev);
+    <ThemeContext.Provider
+
+      value={{
+
+        theme:
+          dark
+            ?
+            darkTheme
+            :
+            lightTheme,
+
+
+        toggleTheme
+
+      }}
+
+    >
+
+      {children}
+
+    </ThemeContext.Provider>
+
+  );
+
 
 }
 
 
 
-return (
-
-<ThemeContext.Provider
-
-value={{
-
- theme:isDark
- ? darkTheme
- : lightTheme,
-
- toggleTheme
-
-}}
-
->
-
-{children}
-
-</ThemeContext.Provider>
+export function useTheme() {
 
 
-);
+  return useContext(
+    ThemeContext
+  );
 
-}
-
-
-
-
-export function useTheme(){
-
-const context =
-useContext(ThemeContext);
-
-
-if(!context){
-
-throw new Error(
-"useTheme must be inside ThemeProvider"
-);
-
-}
-
-
-return context;
 
 }
