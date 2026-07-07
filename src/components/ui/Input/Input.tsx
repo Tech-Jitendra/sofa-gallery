@@ -1,59 +1,174 @@
 import React from "react";
+
 import {
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
+  StyleSheet,
+  TextInput,
+  View,
 } from "react-native";
 
-import { Colors } from "@/theme/colors";
 
-interface Props {
+import {
+  useTheme,
+} from "@/theme";
+
+import Typography from "../Typography/Typography";
+
+interface Props
+  extends React.ComponentProps<
+    typeof TextInput
+  > {
+
   label?: string;
+
   error?: string;
+
 }
+
+
 
 export default function Input({
+
   label,
+
   error,
+
+  style,
+
   ...props
-}: Props &
-  React.ComponentProps<typeof TextInput>) {
+
+}: Props) {
+
+
+  const {
+    theme
+  } = useTheme();
+
+
+
   return (
-    <View style={styles.container}>
-      {label && <Text style={styles.label}>{label}</Text>}
+
+    <View
+      style={styles.container}
+    >
+
+      {
+        label &&
+        (
+
+          <Typography
+
+            variant="caption"
+
+            style={{
+              marginBottom: 8,
+              fontWeight: "600",
+            }}
+
+          >
+
+            {label}
+
+          </Typography>
+
+        )
+      }
+
+
 
       <TextInput
-        style={styles.input}
-        placeholderTextColor="#999"
+
+
+        placeholderTextColor={
+          theme.colors.textSecondary
+        }
+
+
+        style={[
+
+          styles.input,
+
+          {
+
+            backgroundColor:
+              theme.colors.surface,
+
+
+            color:
+              theme.colors.text,
+
+
+            borderColor:
+              theme.colors.border,
+
+          },
+
+          style,
+
+        ]}
+
+
         {...props}
+
       />
 
-      {!!error && <Text style={styles.error}>{error}</Text>}
+
+
+      {
+        error &&
+        (
+
+          <Typography
+
+            variant="caption"
+
+            color={
+              theme.colors.danger
+            }
+
+            style={{
+              marginTop: 6,
+            }}
+
+          >
+
+            {error}
+
+          </Typography>
+
+        )
+      }
+
+
     </View>
+
   );
+
 }
 
+
+
 const styles = StyleSheet.create({
+
   container: {
+
     marginBottom: 18,
+
   },
 
-  label: {
-    marginBottom: 8,
-    fontWeight: "600",
-  },
 
   input: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 12,
-    paddingHorizontal: 16,
+
     height: 52,
+
+    borderWidth: 1,
+
+    borderRadius: 12,
+
+    paddingHorizontal: 16,
+
+    fontSize: 16,
+
   },
 
-  error: {
-    marginTop: 6,
-    color: Colors.danger,
-  },
+
 });

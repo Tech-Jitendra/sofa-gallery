@@ -1,24 +1,88 @@
-import { View, StyleSheet } from "react-native";
-import { Colors } from "@/theme/colors";
+import React from "react";
+
+import {
+  StyleSheet,
+  View,
+  ViewProps,
+} from "react-native";
+
+import {
+  useTheme
+} from "@/theme";
+
+
 
 export default function Card({
+
   children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <View style={styles.card}>{children}</View>;
+
+  style,
+
+  ...props
+
+}: ViewProps) {
+
+
+  const {
+    theme
+  } = useTheme();
+
+
+
+  return (
+
+    <View
+
+      style={[
+        styles.card,
+
+        {
+
+          backgroundColor:
+            theme.colors.card,
+
+          borderColor:
+            theme.colors.border,
+
+        },
+
+        style,
+
+      ]}
+
+      {...props}
+
+    >
+
+      {children}
+
+    </View>
+
+  );
+
 }
 
+
+
 const styles = StyleSheet.create({
+
   card: {
-    backgroundColor: "#fff",
+
     padding: 16,
+
     borderRadius: 16,
 
+    borderWidth: 1,
+
+
     shadowColor: "#000",
+
     shadowOpacity: 0.08,
+
     shadowRadius: 10,
 
     elevation: 3,
+
   },
+
 });
