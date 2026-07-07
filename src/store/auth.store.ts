@@ -1,32 +1,16 @@
 import { create } from "zustand";
 
 
-interface User {
-
-    id: string;
-
-    name: string;
-
-    email: string;
-
-}
-
-
 
 interface AuthState {
 
-
-    user: User | null;
-
-
     token: string | null;
 
+    loading: boolean;
 
-    login:
-    (
-        user: User,
-        token: string
-    ) => void;
+
+    setToken:
+    (token: string) => void;
 
 
     logout:
@@ -40,37 +24,32 @@ interface AuthState {
 export const useAuthStore =
     create<AuthState>((set) => ({
 
-
-        user: null,
-
-
         token: null,
 
+        loading: true,
 
 
-        login(
-            user,
-            token
-        ) {
+        setToken(token) {
 
             set({
-                user,
-                token
+                token,
+                loading: false
             });
 
         },
 
 
-
         logout() {
 
             set({
-                user: null,
-                token: null
+
+                token: null,
+
+                loading: false
+
             });
 
         }
-
 
 
     }));

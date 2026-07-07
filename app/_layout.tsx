@@ -1,12 +1,15 @@
-import { Stack } from "expo-router";
+import {
+  Stack
+} from "expo-router";
+
 
 import {
-  ThemeProvider,
+  ThemeProvider
 } from "@/theme";
 
 
 import {
-  QueryProvider,
+  QueryProvider
 } from "@/providers";
 
 
@@ -25,10 +28,30 @@ export default function RootLayout() {
         <Stack
 
           screenOptions={{
-            headerShown: false,
+
+            headerShown: false
+
           }}
 
-        />
+        >
+
+
+          <Stack.Screen
+            name="splash"
+          />
+
+
+          <Stack.Screen
+            name="(auth)"
+          />
+
+
+          <Stack.Screen
+            name="(tabs)"
+          />
+
+
+        </Stack>
 
 
       </QueryProvider>
@@ -37,6 +60,5 @@ export default function RootLayout() {
     </ThemeProvider>
 
   );
-
 
 }
