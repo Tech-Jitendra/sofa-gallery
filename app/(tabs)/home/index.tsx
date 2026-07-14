@@ -1,38 +1,35 @@
+import React from "react";
 import {
-    Header,
-    Screen
-} from "@/components/layout";
+    ScrollView
+} from "react-native";
 
-
-import {
-    Typography
-} from "@/components/ui";
+import AppHeader from "@/features/home/components/AppHeader/AppHeader";
+import CategoryList from "@/features/home/components/CategoryList/CategoryList";
+import FlashSale from "@/features/home/components/FlashSale/FlashSale";
+import HeroCarousel from "@/features/home/components/HeroCarousel/HeroCarousel";
+import SearchBar from "@/features/home/components/SearchBar/SearchBar";
 
 
 export default function Home() {
 
-
     return (
 
-        <Screen>
+        <ScrollView>
 
-
-            <Header
-                title="Home"
+            <AppHeader
+                cartCount={3}
             />
 
+            <SearchBar />
 
-            <Typography
-                variant="display"
-            >
+            <HeroCarousel />
 
-                Welcome
+            <CategoryList />
 
-            </Typography>
+            <FlashSale />
 
+        </ScrollView>
 
-        </Screen>
-
-    );
+    )
 
 }
