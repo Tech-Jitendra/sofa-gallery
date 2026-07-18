@@ -15,8 +15,8 @@ interface Props {
 export default function SearchBar({
     onSearchPress,
 }: Props) {
-    const { colors } = useTheme();
-    const styles = createStyles(colors);
+    const { theme } = useTheme();
+    const styles = createStyles(theme.colors);
     return (
         <View style={styles.container}>
 

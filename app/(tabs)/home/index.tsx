@@ -29,9 +29,7 @@ export default function Home() {
         theme
     } = useTheme();
 
-
     const colors = theme.colors;
-
 
     const [refreshing, setRefreshing] =
         React.useState(false);
@@ -39,16 +37,12 @@ export default function Home() {
 
 
     const onRefresh = async () => {
-
         setRefreshing(true);
-
         // later:
         // refetch products/categories
-
         setTimeout(() => {
             setRefreshing(false);
         },800);
-
     };
 
 
@@ -66,52 +60,31 @@ export default function Home() {
         >
 
             <ScrollView
-
                 showsVerticalScrollIndicator={false}
-
                 contentContainerStyle={
                     styles.content
                 }
-
-
                 refreshControl={
                     <RefreshControl
-
                         refreshing={
                             refreshing
                         }
-
                         onRefresh={
                             onRefresh
                         }
-
                         tintColor={
                             colors.primary
                         }
-
                     />
                 }
-
             >
-
-
-                {/* <AppHeader
+                <AppHeader
                     cartCount={3}
                 />
-
-
                 <SearchBar />
-
-
                 <HeroCarousel />
-
-
                 <CategoryList />
-
-
-                <FlashSale /> */}
-
-
+                <FlashSale />
             </ScrollView>
 
 
