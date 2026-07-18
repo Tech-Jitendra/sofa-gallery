@@ -1,45 +1,22 @@
-import React from "react";
-import {
-    StyleSheet,
-    View,
-    ViewProps
-} from "react-native";
-
-import {
-    Spacing
-} from "@/theme";
-
+import { Spacing } from "@/theme";
+import { View } from "react-native";
 
 export default function ScreenSection({
-    children,
-    style,
-    ...props
-}: ViewProps) {
+    children
+}:{
+    children:React.ReactNode;
+}){
 
     return (
 
         <View
-            style={[
-                styles.container,
-                style
-            ]}
-            {...props}
+            style={{
+                paddingHorizontal:Spacing.md
+            }}
         >
-
             {children}
-
         </View>
 
     );
 
 }
-
-
-const styles = StyleSheet.create({
-
-    container: {
-        marginHorizontal:
-            Spacing.md,
-    }
-
-});

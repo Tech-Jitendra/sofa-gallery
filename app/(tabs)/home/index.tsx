@@ -8,19 +8,31 @@ import {
     View,
 } from "react-native";
 
+
 import {
     SafeAreaView,
 } from "react-native-safe-area-context";
 
 
 import AppHeader from "@/features/home/components/AppHeader/AppHeader";
+import SearchBar from "@/features/home/components/SearchBar/SearchBar";
+
 import CategoryList from "@/features/home/components/CategoryList/CategoryList";
 import FlashSale from "@/features/home/components/FlashSale/FlashSale";
 import HeroCarousel from "@/features/home/components/HeroCarousel/HeroCarousel";
-import SearchBar from "@/features/home/components/SearchBar/SearchBar";
+
+import BestSellers from "@/features/home/components/BestSellers/BestSellers";
+import BrandList from "@/features/home/components/BrandList/BrandList";
+import NewArrivals from "@/features/home/components/NewArrivals/NewArrivals";
+import PopularCollections from "@/features/home/components/PopularCollections/PopularCollections";
+import ReviewCarousel from "@/features/home/components/ReviewCarousel/ReviewCarousel";
+import RoomInspiration from "@/features/home/components/RoomInspiration/RoomInspiration";
+import WhyChooseUs from "@/features/home/components/WhyChooseUs/WhyChooseUs";
 
 
 import ScreenSection from "@/components/ui/ScreenSection";
+
+
 import {
     FontSize,
     FontWeight,
@@ -28,6 +40,7 @@ import {
     Spacing,
     useTheme,
 } from "@/theme";
+
 
 
 export default function Home() {
@@ -43,18 +56,21 @@ export default function Home() {
 
 
 
-    const [refreshing, setRefreshing] =
-        React.useState(false);
+    const [
+        refreshing,
+        setRefreshing
+    ] = React.useState(false);
 
 
 
-    const onRefresh = async () => {
+    const onRefresh = () => {
+
 
         setRefreshing(true);
 
 
-        // later:
-        // await refetch products
+        // Later:
+        // refetch home api
 
 
         setTimeout(() => {
@@ -63,11 +79,15 @@ export default function Home() {
 
         }, 800);
 
+
     };
 
 
 
+
+
     return (
+
 
         <SafeAreaView
 
@@ -85,16 +105,23 @@ export default function Home() {
             <ScrollView
 
 
-                showsVerticalScrollIndicator={false}
+                showsVerticalScrollIndicator={
+                    false
+                }
+
 
 
                 refreshControl={
 
                     <RefreshControl
 
-                        refreshing={refreshing}
+                        refreshing={
+                            refreshing
+                        }
 
-                        onRefresh={onRefresh}
+                        onRefresh={
+                            onRefresh
+                        }
 
                         tintColor={
                             colors.primary
@@ -105,22 +132,36 @@ export default function Home() {
                 }
 
 
+
                 contentContainerStyle={{
-                    paddingBottom: 120
+
+                    paddingBottom:
+                        120
+
                 }}
 
             >
 
 
+
+
+                {/* Header */}
+
                 <AppHeader
+
                     cartCount={3}
+
                 />
 
 
 
-                {/* Welcome */}
+
+
+                {/* Welcome Card */}
+
 
                 <View
+
                     style={[
                         styles.welcome,
                         {
@@ -128,9 +169,12 @@ export default function Home() {
                                 colors.surface
                         }
                     ]}
+
                 >
 
+
                     <Text
+
                         style={[
                             styles.greeting,
                             {
@@ -138,12 +182,17 @@ export default function Home() {
                                     colors.text
                             }
                         ]}
+
                     >
+
                         Make your home beautiful ✨
+
                     </Text>
 
 
+
                     <Text
+
                         style={[
                             styles.subtitle,
                             {
@@ -151,9 +200,12 @@ export default function Home() {
                                     colors.textSecondary
                             }
                         ]}
+
                     >
+
                         Discover premium sofas
                         designed for comfort
+
                     </Text>
 
 
@@ -162,57 +214,289 @@ export default function Home() {
 
 
 
-                <SearchBar />
 
+                {/* Search */}
+
+
+                <SearchBar />
 
 
                 {/* Hero */}
 
-                <View
-                    style={styles.section}
-                >
 
-                    <ScreenSection>
-                        <HeroCarousel />
-                    </ScreenSection>
+                <SectionTitle
 
-                </View>
+                    title="Featured"
+
+                    color={
+                        colors.text
+                    }
+
+                />
+
+
+                <ScreenSection>
+
+                    <HeroCarousel />
+
+                </ScreenSection>
+
+
+
 
 
 
 
                 {/* Categories */}
 
+
                 <SectionTitle
+
                     title="Shop by Category"
-                    color={colors.text}
+
+                    color={
+                        colors.text
+                    }
+
                 />
 
 
                 <ScreenSection>
+
                     <CategoryList />
+
                 </ScreenSection>
+
+
+
+
+
+
+
+                {/* Collections */}
+
+
+                <SectionTitle
+
+                    title="Popular Collections"
+
+                    color={
+                        colors.text
+                    }
+
+                />
+
+
+                <ScreenSection>
+
+                    <PopularCollections />
+
+                </ScreenSection>
+
+
+
+
+
 
 
                 {/* Flash Sale */}
 
+
                 <SectionTitle
+
                     title="Flash Sale 🔥"
-                    color={colors.text}
+
+                    color={
+                        colors.text
+                    }
+
                 />
 
 
                 <ScreenSection>
+
                     <FlashSale />
+
                 </ScreenSection>
 
 
 
-                {/* Feature cards */}
+
+
+
+
+                {/* Best Sellers */}
+
+
+
+                <SectionTitle
+
+                    title="Best Sellers ⭐"
+
+                    color={
+                        colors.text
+                    }
+
+                />
+
+
+                <ScreenSection>
+
+                    <BestSellers />
+
+                </ScreenSection>
+
+
+
+
+
+
+
+                {/* New Arrivals */}
+
+
+
+                <SectionTitle
+
+                    title="New Arrivals ✨"
+
+                    color={
+                        colors.text
+                    }
+
+                />
+
+
+                <ScreenSection>
+
+                    <NewArrivals />
+
+                </ScreenSection>
+
+
+
+
+
+
+
+                {/* Room Inspiration */}
+
+
+
+                <SectionTitle
+
+                    title="Room Inspiration 🏠"
+
+                    color={
+                        colors.text
+                    }
+
+                />
+
+
+                <ScreenSection>
+
+                    <RoomInspiration />
+
+                </ScreenSection>
+
+
+
+
+
+
+
+                {/* Brands */}
+
+
+
+                <SectionTitle
+
+                    title="Top Brands"
+
+                    color={
+                        colors.text
+                    }
+
+                />
+
+
+                <ScreenSection>
+
+                    <BrandList />
+
+                </ScreenSection>
+
+
+
+
+
+
+
+                {/* Reviews */}
+
+
+
+                <SectionTitle
+
+                    title="Customer Reviews"
+
+                    color={
+                        colors.text
+                    }
+
+                />
+
+
+                <ScreenSection>
+
+                    <ReviewCarousel />
+
+                </ScreenSection>
+
+
+
+
+
+
+
+                {/* Why Us */}
+
+
+
+                <SectionTitle
+
+                    title="Why Choose Sofa Gallery?"
+
+                    color={
+                        colors.text
+                    }
+
+                />
+
+
+                <ScreenSection>
+
+                    <WhyChooseUs />
+
+                </ScreenSection>
+
+
+
+
+
+
+
+                {/* Bottom Feature Cards */}
+
+
 
                 <View
+
                     style={styles.cards}
+
                 >
+
 
 
                     <FeatureCard
@@ -221,9 +505,12 @@ export default function Home() {
 
                         subtitle="Across India"
 
-                        color={colors.success}
+                        color={
+                            colors.success
+                        }
 
                     />
+
 
 
                     <FeatureCard
@@ -232,18 +519,24 @@ export default function Home() {
 
                         subtitle="30 days policy"
 
-                        color={colors.warning}
+                        color={
+                            colors.warning
+                        }
 
                     />
 
 
+
                 </View>
+
+
 
 
             </ScrollView>
 
 
         </SafeAreaView>
+
 
     );
 
@@ -252,13 +545,22 @@ export default function Home() {
 
 
 
+
+
+
 function SectionTitle({
+
     title,
     color
+
 }: {
+
     title: string;
+
     color: string;
+
 }) {
+
 
     return (
 
@@ -285,6 +587,8 @@ function SectionTitle({
 
 
 
+
+
 function FeatureCard({
 
     title,
@@ -292,9 +596,13 @@ function FeatureCard({
     color
 
 }: {
+
     title: string;
+
     subtitle: string;
+
     color: string;
+
 }) {
 
 
@@ -313,16 +621,28 @@ function FeatureCard({
         >
 
             <Text
-                style={styles.featureTitle}
+
+                style={
+                    styles.featureTitle
+                }
+
             >
+
                 {title}
+
             </Text>
 
 
             <Text
-                style={styles.featureSubtitle}
+
+                style={
+                    styles.featureSubtitle
+                }
+
             >
+
                 {subtitle}
+
             </Text>
 
 
@@ -337,12 +657,16 @@ function FeatureCard({
 
 
 
+
+
 const styles = StyleSheet.create({
 
 
+
     container: {
-        flex: 1,
+        flex: 1
     },
+
 
 
     welcome: {
@@ -367,33 +691,32 @@ const styles = StyleSheet.create({
     },
 
 
+
     greeting: {
+
 
         fontSize:
             FontSize.xl,
 
+
         fontWeight:
             FontWeight.bold,
 
+
     },
+
 
 
     subtitle: {
 
+
         marginTop:
             Spacing.sm,
+
 
         fontSize:
             FontSize.sm,
 
-    },
-
-
-
-    section: {
-
-        marginTop:
-            Spacing.md,
 
     },
 
@@ -401,20 +724,26 @@ const styles = StyleSheet.create({
 
     sectionTitle: {
 
-        fontSize:
-            FontSize.lg,
-
-        fontWeight:
-            FontWeight.bold,
 
         marginHorizontal:
             Spacing.md,
 
+
         marginTop:
             Spacing.lg,
 
+
         marginBottom:
-            Spacing.md,
+            Spacing.sm,
+
+
+        fontSize:
+            FontSize.lg,
+
+
+        fontWeight:
+            FontWeight.bold,
+
 
     },
 
@@ -422,14 +751,18 @@ const styles = StyleSheet.create({
 
     cards: {
 
+
         flexDirection:
             "row",
+
 
         gap:
             Spacing.md,
 
+
         margin:
             Spacing.md,
+
 
     },
 
@@ -437,35 +770,47 @@ const styles = StyleSheet.create({
 
     featureCard: {
 
+
         flex: 1,
 
-        borderWidth:
-            1,
-
-        borderRadius:
-            Radius.md,
 
         padding:
             Spacing.md,
 
+
+        borderWidth:
+            1,
+
+
+        borderRadius:
+            Radius.md,
+
+
     },
+
 
 
     featureTitle: {
 
+
         fontWeight:
-            "700",
+            FontWeight.bold,
+
 
     },
 
 
+
     featureSubtitle: {
 
+
         marginTop:
-            4,
+            Spacing.xs,
+
 
         color:
-            "#777",
+            "#777"
+
 
     },
 
