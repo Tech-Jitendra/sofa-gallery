@@ -1,3 +1,4 @@
+import { useTheme } from "@/theme";
 import React from "react";
 import {
     FlatList,
@@ -5,7 +6,8 @@ import {
     Text,
     View
 } from "react-native";
-import CategoryListStyles from "./CategoryList.styles";
+import { createStyles } from "./CategoryList.styles";
+
 
 const categories = [
     {
@@ -22,7 +24,8 @@ const categories = [
 
 
 export default function CategoryList() {
-
+    const { colors } = useTheme();
+    const styles = createStyles(colors);
     return (
 
         <FlatList
@@ -32,13 +35,13 @@ export default function CategoryList() {
 
             renderItem={({ item }) => (
 
-                <View style={CategoryListStyles.item}>
+                <View style={styles.item}>
 
                     <Image
                         source={{
                             uri: item.image
                         }}
-                        style={CategoryListStyles.image}
+                        style={styles.image}
                     />
 
                     <Text>

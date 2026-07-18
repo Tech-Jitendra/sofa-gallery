@@ -1,64 +1,27 @@
-import {
-  Stack
-} from "expo-router";
+import { Stack } from "expo-router";
 
-
-import {
-  ThemeProvider
-} from "@/theme";
-
-
-import {
-  QueryProvider
-} from "@/providers";
-
+import { QueryProvider } from "@/providers";
+import { ThemeProvider } from "@/theme";
 
 
 export default function RootLayout() {
 
+    return (
 
-  return (
+        <ThemeProvider>
 
-    <ThemeProvider>
+            <QueryProvider>
 
+                <Stack
+                    screenOptions={{
+                        headerShown:false
+                    }}
+                />
 
-      <QueryProvider>
+            </QueryProvider>
 
+        </ThemeProvider>
 
-        <Stack
-
-          screenOptions={{
-
-            headerShown: false
-
-          }}
-
-        >
-
-
-          <Stack.Screen
-            name="splash"
-          />
-
-
-          <Stack.Screen
-            name="(auth)"
-          />
-
-
-          <Stack.Screen
-            name="(tabs)"
-          />
-
-
-        </Stack>
-
-
-      </QueryProvider>
-
-
-    </ThemeProvider>
-
-  );
+    );
 
 }
