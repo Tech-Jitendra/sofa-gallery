@@ -1,50 +1,205 @@
-# Welcome to your Expo app 👋
+# 🛋️ Sofa Gallery
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern furniture shopping mobile application built with **Expo React Native**.  
+Sofa Gallery provides a premium e-commerce experience for browsing sofas, furniture collections, managing carts, user accounts, and personalized shopping.
 
-## Get started
+The application is designed with a scalable architecture suitable for production-level development.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+# 📱 Screenshots
 
-2. Start the app
+│
+├── app
+│ │
+│ ├── _layout.tsx
+│ ├── index.tsx
+│ │
+│ ├── (auth)
+│ │ ├── login.tsx
+│ │ └── register.tsx
+│ │
+│ ├── (tabs)
+│ │ ├── _layout.tsx
+│ │ ├── home
+│ │ │ └── index.tsx
+│ │ ├── cart
+│ │ │ └── index.tsx
+│ │ └── profile
+│ │ └── index.tsx
+│ │
+│ ├── home
+│ │ ├── products.tsx
+│ │ ├── categories.tsx
+│ │ └── product-details.tsx
+│ │
+│ └── profile
+│ └── settings.tsx
+│
+│
+├── src
+│
+│ ├── api
+│ │ └── client.ts
+│
+│ ├── components
+│ │ └── ui
+│ │
+│ ├── features
+│ │ │
+│ │ ├── home
+│ │ │ ├── components
+│ │ │ ├── services
+│ │ │ └── hooks
+│ │ │
+│ │ ├── auth
+│ │ ├── cart
+│ │ └── profile
+│ │
+│ ├── store
+│ │ ├── auth.store.ts
+│ │ ├── cart.store.ts
+│ │ └── theme.store.ts
+│ │
+│ ├── theme
+│ │ ├── colors.ts
+│ │ ├── spacing.ts
+│ │ ├── radius.ts
+│ │ ├── typography.ts
+│ │ ├── themes.ts
+│ │ └── ThemeProvider.tsx
+│ │
+│ ├── i18n
+│ │ ├── index.ts
+│ │ └── locales
+│ │ ├── en.ts
+│ │ └── hi.ts
+│ │
+│ └── lib
+│ └── storage.ts
+│
+└── package.json
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+# ✨ Features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Authentication
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- User login
+- User registration
+- Secure token storage
+- Authentication state management
+- Protected routes
+- Splash screen navigation
 
-## Get a fresh project
 
-When you're ready, run:
+## Home Experience
 
-```bash
-npm run reset-project
-```
+- Premium furniture showcase
+- Hero carousel
+- Search functionality
+- Category browsing
+- Flash sale section
+- Featured products
+- Product cards
+- Pull-to-refresh support
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+## Product Experience
 
-To learn more about developing your project with Expo, look at the following resources:
+- Product listing
+- Product details
+- Furniture categories
+- Product navigation
+- Wishlist support (planned)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
+## Cart
 
-Join our community of developers creating universal apps.
+- Add products to cart
+- Remove products
+- Update quantity
+- Cart persistence
+- Price calculation
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Profile
+
+- User profile
+- Account settings
+- Language preferences
+- Theme preferences
+
+
+## Localization
+
+Supported languages:
+
+- 🇬🇧 English
+- 🇮🇳 Hindi
+
+Powered by:
+
+- i18next
+- react-i18next
+
+
+## Theme Support
+
+- Light theme
+- Dark theme
+- Centralized design tokens
+- Dynamic colors
+
+
+---
+
+# 🏗️ Tech Stack
+
+## Mobile
+
+| Technology | Purpose |
+|---|---|
+| Expo SDK 54 | Mobile framework |
+| React Native 0.81 | UI framework |
+| TypeScript | Type safety |
+| Expo Router | File-based navigation |
+
+
+## State Management
+
+| Technology | Purpose |
+|-|-|
+| Zustand | Local application state |
+| MMKV | Fast persistence |
+
+
+## Server Data
+
+| Technology | Purpose |
+|-|-|
+| React Query | API state management |
+| Axios | HTTP client |
+
+
+## Forms & Validation
+
+| Technology | Purpose |
+|-|-|
+| React Hook Form | Form handling |
+| Zod | Validation schemas |
+
+
+## UI
+
+| Technology | Purpose |
+|-|-|
+| Custom Design System | Consistent UI |
+| Lucide React Native | Icons |
+| React Native Safe Area Context | Safe layouts |
+
+
+---
+
+# 📂 Project Structure

@@ -4,6 +4,8 @@ import {
     RefreshControl,
     ScrollView,
     StyleSheet,
+    Text,
+    View,
 } from "react-native";
 
 import {
@@ -19,30 +21,47 @@ import SearchBar from "@/features/home/components/SearchBar/SearchBar";
 
 
 import {
-    useTheme
+    FontSize,
+    FontWeight,
+    Radius,
+    Spacing,
+    useTheme,
 } from "@/theme";
 
-console.log("Home screen rendered");
+
 export default function Home() {
+
 
     const {
         theme
     } = useTheme();
 
-    const colors = theme.colors;
 
-    const [refreshing, setRefreshing] =
+    const colors =
+        theme.colors;
+
+
+
+    const [refreshing,setRefreshing] =
         React.useState(false);
 
 
 
-    const onRefresh = async () => {
+    const onRefresh = async()=>{
+
         setRefreshing(true);
+
+
         // later:
-        // refetch products/categories
-        setTimeout(() => {
+        // await refetch products
+
+
+        setTimeout(()=>{
+
             setRefreshing(false);
+
         },800);
+
     };
 
 
@@ -50,56 +69,401 @@ export default function Home() {
     return (
 
         <SafeAreaView
+
             style={[
                 styles.container,
                 {
                     backgroundColor:
-                        colors.background
+                    colors.background
                 }
             ]}
+
         >
 
+
             <ScrollView
+
+
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={
-                    styles.content
-                }
+
+
                 refreshControl={
+
                     <RefreshControl
-                        refreshing={
-                            refreshing
-                        }
-                        onRefresh={
-                            onRefresh
-                        }
+
+                        refreshing={refreshing}
+
+                        onRefresh={onRefresh}
+
                         tintColor={
                             colors.primary
                         }
+
                     />
+
                 }
+
+
+                contentContainerStyle={{
+                    paddingBottom:120
+                }}
+
             >
+
+
                 <AppHeader
                     cartCount={3}
                 />
+
+
+
+                {/* Welcome */}
+
+                <View
+                    style={[
+                        styles.welcome,
+                        {
+                            backgroundColor:
+                            colors.surface
+                        }
+                    ]}
+                >
+
+                    <Text
+                        style={[
+                            styles.greeting,
+                            {
+                                color:
+                                colors.text
+                            }
+                        ]}
+                    >
+                        Make your home beautiful ✨
+                    </Text>
+
+
+                    <Text
+                        style={[
+                            styles.subtitle,
+                            {
+                                color:
+                                colors.textSecondary
+                            }
+                        ]}
+                    >
+                        Discover premium sofas
+                        designed for comfort
+                    </Text>
+
+
+                </View>
+
+
+
+
                 <SearchBar />
-                <HeroCarousel />
+
+
+
+                {/* Hero */}
+
+                <View
+                    style={styles.section}
+                >
+
+                    <HeroCarousel />
+
+                </View>
+
+
+
+
+                {/* Categories */}
+
+                <SectionTitle
+                    title="Shop by Category"
+                    color={colors.text}
+                />
+
+
                 <CategoryList />
+
+
+
+
+
+                {/* Flash Sale */}
+
+                <SectionTitle
+                    title="Flash Sale 🔥"
+                    color={colors.text}
+                />
+
+
                 <FlashSale />
+
+
+
+                {/* Feature cards */}
+
+                <View
+                    style={styles.cards}
+                >
+
+
+                    <FeatureCard
+
+                        title="Free Delivery"
+
+                        subtitle="Across India"
+
+                        color={colors.success}
+
+                    />
+
+
+                    <FeatureCard
+
+                        title="Easy Returns"
+
+                        subtitle="30 days policy"
+
+                        color={colors.warning}
+
+                    />
+
+
+                </View>
+
+
             </ScrollView>
 
 
         </SafeAreaView>
 
     );
+
 }
 
 
 
+
+function SectionTitle({
+    title,
+    color
+}:{
+    title:string;
+    color:string;
+}){
+
+    return(
+
+        <Text
+
+            style={[
+                styles.sectionTitle,
+                {
+                    color
+                }
+            ]}
+
+        >
+
+            {title}
+
+        </Text>
+
+    );
+
+}
+
+
+
+
+
+function FeatureCard({
+
+    title,
+    subtitle,
+    color
+
+}:{
+    title:string;
+    subtitle:string;
+    color:string;
+}){
+
+
+    return(
+
+        <View
+
+            style={[
+                styles.featureCard,
+                {
+                    borderColor:
+                    color
+                }
+            ]}
+
+        >
+
+            <Text
+                style={styles.featureTitle}
+            >
+                {title}
+            </Text>
+
+
+            <Text
+                style={styles.featureSubtitle}
+            >
+                {subtitle}
+            </Text>
+
+
+        </View>
+
+    );
+
+}
+
+
+
+
+
+
 const styles = StyleSheet.create({
+
+
     container:{
         flex:1,
     },
-    content:{
-        paddingBottom:100,
-    }
+
+
+    welcome:{
+
+
+        marginHorizontal:
+        Spacing.md,
+
+
+        marginTop:
+        Spacing.md,
+
+
+        padding:
+        Spacing.lg,
+
+
+        borderRadius:
+        Radius.lg,
+
+
+    },
+
+
+    greeting:{
+
+        fontSize:
+        FontSize.xl,
+
+        fontWeight:
+        FontWeight.bold,
+
+    },
+
+
+    subtitle:{
+
+        marginTop:
+        Spacing.sm,
+
+        fontSize:
+        FontSize.sm,
+
+    },
+
+
+
+    section:{
+
+        marginTop:
+        Spacing.md,
+
+    },
+
+
+
+    sectionTitle:{
+
+        fontSize:
+        FontSize.lg,
+
+        fontWeight:
+        FontWeight.bold,
+
+        marginHorizontal:
+        Spacing.md,
+
+        marginTop:
+        Spacing.lg,
+
+        marginBottom:
+        Spacing.md,
+
+    },
+
+
+
+    cards:{
+
+        flexDirection:
+        "row",
+
+        gap:
+        Spacing.md,
+
+        margin:
+        Spacing.md,
+
+    },
+
+
+
+    featureCard:{
+
+        flex:1,
+
+        borderWidth:
+        1,
+
+        borderRadius:
+        Radius.md,
+
+        padding:
+        Spacing.md,
+
+    },
+
+
+    featureTitle:{
+
+        fontWeight:
+        "700",
+
+    },
+
+
+    featureSubtitle:{
+
+        marginTop:
+        4,
+
+        color:
+        "#777",
+
+    },
+
+
 });
