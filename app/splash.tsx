@@ -1,13 +1,11 @@
+import { Typography } from "@/components/ui";
+import { useAuthStore } from "@/store/auth.store";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
 
-import { Typography } from "@/components/ui";
-import { useAuthStore } from "@/store/auth.store";
-
 
 export default function Splash() {
-
 
     const token = useAuthStore(
         state => state.token
@@ -15,62 +13,37 @@ export default function Splash() {
 
 
     useEffect(() => {
-
         const timer = setTimeout(() => {
-
-
-            if (!token) {
-
+            if (token) {
                 router.replace("/(tabs)");
-
             } else {
-
                 router.replace("/(auth)/login");
-
             }
-
-
         }, 1000);
-
-
         return () => clearTimeout(timer);
-
-
     }, [token]);
 
 
 
     return (
-
         <View
-
             style={{
-
                 flex: 1,
-
                 justifyContent: "center",
-
                 alignItems: "center"
-
             }}
-
         >
-
             <Typography
                 variant="display"
             >
                 Sofa Gallery
             </Typography>
 
-
             <ActivityIndicator
                 style={{
-                    marginTop:20
+                    marginTop: 20
                 }}
             />
-
         </View>
-
     );
-
 }
