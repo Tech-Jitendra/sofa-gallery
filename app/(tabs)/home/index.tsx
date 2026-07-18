@@ -20,6 +20,7 @@ import HeroCarousel from "@/features/home/components/HeroCarousel/HeroCarousel";
 import SearchBar from "@/features/home/components/SearchBar/SearchBar";
 
 
+import ScreenSection from "@/components/ui/ScreenSection";
 import {
     FontSize,
     FontWeight,
@@ -42,12 +43,12 @@ export default function Home() {
 
 
 
-    const [refreshing,setRefreshing] =
+    const [refreshing, setRefreshing] =
         React.useState(false);
 
 
 
-    const onRefresh = async()=>{
+    const onRefresh = async () => {
 
         setRefreshing(true);
 
@@ -56,11 +57,11 @@ export default function Home() {
         // await refetch products
 
 
-        setTimeout(()=>{
+        setTimeout(() => {
 
             setRefreshing(false);
 
-        },800);
+        }, 800);
 
     };
 
@@ -74,7 +75,7 @@ export default function Home() {
                 styles.container,
                 {
                     backgroundColor:
-                    colors.background
+                        colors.background
                 }
             ]}
 
@@ -105,7 +106,7 @@ export default function Home() {
 
 
                 contentContainerStyle={{
-                    paddingBottom:120
+                    paddingBottom: 120
                 }}
 
             >
@@ -124,7 +125,7 @@ export default function Home() {
                         styles.welcome,
                         {
                             backgroundColor:
-                            colors.surface
+                                colors.surface
                         }
                     ]}
                 >
@@ -134,7 +135,7 @@ export default function Home() {
                             styles.greeting,
                             {
                                 color:
-                                colors.text
+                                    colors.text
                             }
                         ]}
                     >
@@ -147,7 +148,7 @@ export default function Home() {
                             styles.subtitle,
                             {
                                 color:
-                                colors.textSecondary
+                                    colors.textSecondary
                             }
                         ]}
                     >
@@ -171,7 +172,9 @@ export default function Home() {
                     style={styles.section}
                 >
 
-                    <HeroCarousel />
+                    <ScreenSection>
+                        <HeroCarousel />
+                    </ScreenSection>
 
                 </View>
 
@@ -186,10 +189,9 @@ export default function Home() {
                 />
 
 
-                <CategoryList />
-
-
-
+                <ScreenSection>
+                    <CategoryList />
+                </ScreenSection>
 
 
                 {/* Flash Sale */}
@@ -200,7 +202,9 @@ export default function Home() {
                 />
 
 
-                <FlashSale />
+                <ScreenSection>
+                    <FlashSale />
+                </ScreenSection>
 
 
 
@@ -251,12 +255,12 @@ export default function Home() {
 function SectionTitle({
     title,
     color
-}:{
-    title:string;
-    color:string;
-}){
+}: {
+    title: string;
+    color: string;
+}) {
 
-    return(
+    return (
 
         <Text
 
@@ -287,14 +291,14 @@ function FeatureCard({
     subtitle,
     color
 
-}:{
-    title:string;
-    subtitle:string;
-    color:string;
-}){
+}: {
+    title: string;
+    subtitle: string;
+    color: string;
+}) {
 
 
-    return(
+    return (
 
         <View
 
@@ -302,7 +306,7 @@ function FeatureCard({
                 styles.featureCard,
                 {
                     borderColor:
-                    color
+                        color
                 }
             ]}
 
@@ -336,132 +340,132 @@ function FeatureCard({
 const styles = StyleSheet.create({
 
 
-    container:{
-        flex:1,
+    container: {
+        flex: 1,
     },
 
 
-    welcome:{
+    welcome: {
 
 
         marginHorizontal:
-        Spacing.md,
+            Spacing.md,
 
 
         marginTop:
-        Spacing.md,
+            Spacing.md,
 
 
         padding:
-        Spacing.lg,
+            Spacing.lg,
 
 
         borderRadius:
-        Radius.lg,
+            Radius.lg,
 
 
     },
 
 
-    greeting:{
+    greeting: {
 
         fontSize:
-        FontSize.xl,
+            FontSize.xl,
 
         fontWeight:
-        FontWeight.bold,
+            FontWeight.bold,
 
     },
 
 
-    subtitle:{
+    subtitle: {
 
         marginTop:
-        Spacing.sm,
+            Spacing.sm,
 
         fontSize:
-        FontSize.sm,
+            FontSize.sm,
 
     },
 
 
 
-    section:{
+    section: {
 
         marginTop:
-        Spacing.md,
+            Spacing.md,
 
     },
 
 
 
-    sectionTitle:{
+    sectionTitle: {
 
         fontSize:
-        FontSize.lg,
+            FontSize.lg,
 
         fontWeight:
-        FontWeight.bold,
+            FontWeight.bold,
 
         marginHorizontal:
-        Spacing.md,
+            Spacing.md,
 
         marginTop:
-        Spacing.lg,
+            Spacing.lg,
 
         marginBottom:
-        Spacing.md,
+            Spacing.md,
 
     },
 
 
 
-    cards:{
+    cards: {
 
         flexDirection:
-        "row",
+            "row",
 
         gap:
-        Spacing.md,
+            Spacing.md,
 
         margin:
-        Spacing.md,
+            Spacing.md,
 
     },
 
 
 
-    featureCard:{
+    featureCard: {
 
-        flex:1,
+        flex: 1,
 
         borderWidth:
-        1,
+            1,
 
         borderRadius:
-        Radius.md,
+            Radius.md,
 
         padding:
-        Spacing.md,
+            Spacing.md,
 
     },
 
 
-    featureTitle:{
+    featureTitle: {
 
         fontWeight:
-        "700",
+            "700",
 
     },
 
 
-    featureSubtitle:{
+    featureSubtitle: {
 
         marginTop:
-        4,
+            4,
 
         color:
-        "#777",
+            "#777",
 
     },
 
