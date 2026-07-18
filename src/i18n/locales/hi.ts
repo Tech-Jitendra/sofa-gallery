@@ -1,7 +1,7 @@
 export default {
     common: {
         login: "लॉग इन",
-        register: "रजिस्टर",
+        register: "रजिस्टर करें",
         email: "ईमेल",
         password: "पासवर्ड",
         confirmPassword: "पासवर्ड की पुष्टि करें",

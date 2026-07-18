@@ -49,7 +49,7 @@ export default function LoginScreen() {
             />
 
             <View style={styles.content}>
-                <Text style={styles.title}>{t("common.welcomeBack")} 👋</Text>
+                <Text style={styles.title}>{t("common.welcomeBack")}</Text>
 
                 <Text style={styles.subtitle}>
                     {t("common.loginToContinue")}
