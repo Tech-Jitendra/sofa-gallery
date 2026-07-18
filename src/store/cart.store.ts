@@ -1,44 +1,36 @@
 import { create } from "zustand";
-
 import {
-    storageHelpers
-} from "@/lib/storage";
+    createJSONStorage,
+    persist,
+} from "zustand/middleware";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export interface CartItem {
-
     id: string;
-
     name: string;
-
     price: number;
-
     quantity: number;
-
     image: string;
-
 }
-
 
 
 interface CartState {
 
-
     items: CartItem[];
-
 
     addItem:
     (item: CartItem) => void;
 
-
     removeItem:
     (id: string) => void;
-
 
     clearCart:
     () => void;
 
+    updateQuantity:
+    (id: string, quantity: number) => void;
 
     getTotal:
     () => number;
@@ -46,167 +38,205 @@ interface CartState {
 }
 
 
-
-const savedCart =
-    storageHelpers.get<CartItem[]>(
-        "cart"
-    );
-
-
-
 export const useCartStore =
-    create<CartState>((set, get) => ({
+    create<CartState>()(
+
+        persist(
+
+            (set, get) => ({
 
 
-        items:
-            savedCart ?? [],
-
-
-
-        addItem(item) {
-
-
-            const current =
-                get().items;
+                items: [],
 
 
 
-            const exists =
-                current.find(
-                    x => x.id === item.id
-                );
+                addItem(item) {
+
+
+                    const current =
+                        get().items;
+
+
+                    const exists =
+                        current.find(
+                            x => x.id === item.id
+                        );
 
 
 
-            let updated;
+                    if (exists) {
+
+
+                        set({
+
+                            items:
+                                current.map(
+                                    x =>
+
+                                        x.id === item.id
+
+                                            ?
+
+                                            {
+                                                ...x,
+                                                quantity:
+                                                    x.quantity + 1
+                                            }
+
+                                            :
+
+                                            x
+
+                                )
+
+                        });
+
+
+                    }
+
+                    else {
+
+
+                        set({
+
+                            items: [
+                                ...current,
+                                item
+                            ]
+
+                        });
+
+
+                    }
+
+                },
 
 
 
-            if (exists) {
+
+                removeItem(id) {
 
 
-                updated =
-                    current.map(
-                        x =>
+                    set({
 
-                            x.id === item.id
+                        items:
+                            get()
+                                .items
+                                .filter(
+                                    item =>
+                                        item.id !== id
+                                )
 
-                                ?
+                    });
 
-                                {
-                                    ...x,
-                                    quantity:
-                                        x.quantity + 1
-                                }
 
-                                :
+                },
 
-                                x
 
-                    );
 
+
+                updateQuantity(
+                    id,
+                    quantity
+                ) {
+
+
+                    if (quantity <= 0) {
+
+                        get()
+                            .removeItem(id);
+
+                        return;
+                    }
+
+
+
+                    set({
+
+                        items:
+                            get()
+                                .items
+                                .map(
+                                    item =>
+
+                                        item.id === id
+
+                                            ?
+
+                                            {
+                                                ...item,
+                                                quantity
+                                            }
+
+                                            :
+
+                                            item
+
+                                )
+
+                    });
+
+
+                },
+
+
+
+
+                clearCart() {
+
+
+                    set({
+                        items: []
+                    });
+
+
+                },
+
+
+
+
+                getTotal() {
+
+
+                    return get()
+                        .items
+                        .reduce(
+
+                            (
+                                total,
+                                item
+                            ) =>
+
+                                total +
+                                (
+                                    item.price *
+                                    item.quantity
+                                ),
+
+                            0
+
+                        );
+
+
+                }
+
+
+            }),
+
+
+            {
+
+                name: "cart-storage",
+
+
+                storage:
+                    createJSONStorage(
+                        () =>
+                            AsyncStorage
+                    ),
 
             }
 
-            else {
+        )
 
-
-                updated = [
-                    ...current,
-                    item
-                ];
-
-
-            }
-
-
-
-            storageHelpers.set(
-                "cart",
-                updated
-            );
-
-
-
-            set({
-                items: updated
-            });
-
-
-        },
-
-
-
-
-        removeItem(id) {
-
-
-            const updated =
-                get()
-                    .items
-                    .filter(
-                        item => item.id !== id
-                    );
-
-
-
-            storageHelpers.set(
-                "cart",
-                updated
-            );
-
-
-
-            set({
-                items: updated
-            });
-
-
-        },
-
-
-
-
-        clearCart() {
-
-
-            storageHelpers.remove(
-                "cart"
-            );
-
-
-            set({
-                items: []
-            });
-
-
-        },
-
-
-
-
-        getTotal() {
-
-
-            return get()
-                .items
-                .reduce(
-
-                    (total, item) =>
-
-                        total +
-                        (item.price *
-                            item.quantity)
-
-                    ,
-
-                    0
-
-                );
-
-
-        }
-
-
-
-    }));
+    );

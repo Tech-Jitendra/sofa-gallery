@@ -1,66 +1,61 @@
 import { create } from "zustand";
-
 import {
-    storageHelpers
-} from "@/lib/storage";
+    createJSONStorage,
+    persist,
+} from "zustand/middleware";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 interface ThemeState {
 
-
     dark: boolean;
 
-
     toggleTheme: () => void;
-
 
 }
 
 
 
-const saved =
-    storageHelpers.get<boolean>(
-        "darkMode"
-    );
-
-
-
 export const useThemeStore =
-    create<ThemeState>((set) => ({
+    create<ThemeState>()(
+
+        persist(
+
+            (set) => ({
 
 
-        dark:
-            saved ?? false,
-
-
-
-        toggleTheme() {
-
-
-            set(state => {
-
-
-                const value =
-                    !state.dark;
-
-
-                storageHelpers.set(
-                    "darkMode",
-                    value
-                );
+                dark: false,
 
 
 
-                return {
-                    dark: value
-                };
+                toggleTheme() {
+
+                    set(state => ({
+
+                        dark: !state.dark
+
+                    }));
+
+                }
 
 
-            });
+            }),
 
 
-        }
+            {
+
+                name: "theme-storage",
 
 
-    }));
+                storage:
+                    createJSONStorage(
+                        () =>
+                            AsyncStorage
+                    ),
+
+            }
+
+        )
+
+    );
