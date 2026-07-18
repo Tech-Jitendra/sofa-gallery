@@ -1,5 +1,10 @@
 import "@/i18n";
+
 import { Stack } from "expo-router";
+
+import { I18nextProvider } from "react-i18next";
+
+import i18n from "@/i18n";
 
 import { QueryProvider } from "@/providers";
 import { ThemeProvider } from "@/theme";
@@ -7,22 +12,23 @@ import { ThemeProvider } from "@/theme";
 
 export default function RootLayout() {
 
-    return (
+  return (
+    <I18nextProvider i18n={i18n}>
 
-        <ThemeProvider>
+      <ThemeProvider>
 
-            <QueryProvider>
+        <QueryProvider>
 
-                <Stack
-                    screenOptions={{
-                        headerShown:false
-                    }}
-                />
+          <Stack
+            screenOptions={{
+              headerShown:false
+            }}
+          />
 
-            </QueryProvider>
+        </QueryProvider>
 
-        </ThemeProvider>
+      </ThemeProvider>
 
-    );
-
+    </I18nextProvider>
+  );
 }

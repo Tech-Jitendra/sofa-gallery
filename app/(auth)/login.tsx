@@ -23,8 +23,15 @@ import { useTranslation } from "react-i18next";
 
 const { t } = useTranslation();
 
+import i18n from "@/i18n";
+
 export default function LoginScreen() {
     const { theme } = useTheme();
+    console.log(
+      "Login i18n:",
+      i18n.isInitialized,
+      i18n.language
+    );
     const colors = theme.colors;
 
     const [email, setEmail] = useState("");
