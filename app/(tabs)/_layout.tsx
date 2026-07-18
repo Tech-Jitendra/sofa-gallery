@@ -1,7 +1,6 @@
-import {
-    Tabs
-} from "expo-router";
+import React from "react";
 
+import { Tabs } from "expo-router";
 
 import {
     Home,
@@ -9,83 +8,87 @@ import {
     User
 } from "lucide-react-native";
 
+import { useTheme } from "@/theme";
+import { View } from "react-native";
 
 
 export default function TabLayout() {
-
+    const {
+        theme
+    } = useTheme();
+    const colors = theme.colors;
 
     return (
-
         <Tabs
-
             screenOptions={{
+                headerShown: true,
 
-                headerShown: false,
+                tabBarActiveTintColor: colors.primary,
+                tabBarInactiveTintColor: colors.textSecondary,
 
-                tabBarActiveTintColor: "#8B5E3C"
+                tabBarStyle: {
+                    backgroundColor: colors.card,
+                    borderTopColor: colors.border,
+
+                    height: 70,
+
+                    elevation: 0,
+                    shadowOpacity: 0,   // iOS shadow remove
+
+                    position: "absolute",
+                },
+
+                tabBarBackground: () => (
+                    <View
+                        style={{
+                            flex: 1,
+                            backgroundColor: colors.card,
+                        }}
+                    />
+                ),
 
             }}
-
         >
-
-
             <Tabs.Screen
-
-                name="home"
-
+                name="home/index"
                 options={{
-
                     title: "Home",
-
-                    tabBarIcon: ({ color }) =>
-
-                        <Home color={color} />
-
+                    tabBarIcon: ({ color, size }) => (
+                        <Home
+                            color={color}
+                            size={size}
+                        />
+                    ),
                 }}
-
             />
 
 
-
             <Tabs.Screen
-
-                name="cart"
-
+                name="cart/index"
                 options={{
-
                     title: "Cart",
-
-                    tabBarIcon: ({ color }) =>
-
-                        <ShoppingCart color={color} />
-
+                    tabBarIcon: ({ color, size }) => (
+                        <ShoppingCart
+                            color={color}
+                            size={size}
+                        />
+                    ),
                 }}
-
             />
-
 
 
             <Tabs.Screen
-
-                name="profile"
-
+                name="profile/index"
                 options={{
-
                     title: "Profile",
-
-                    tabBarIcon: ({ color }) =>
-
-                        <User color={color} />
-
+                    tabBarIcon: ({ color, size }) => (
+                        <User
+                            color={color}
+                            size={size}
+                        />
+                    ),
                 }}
-
             />
-
-
-
         </Tabs>
-
-
     );
-
 }

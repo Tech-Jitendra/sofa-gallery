@@ -14,8 +14,8 @@ export default function Splash() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            if (token) {
-                router.replace("/(tabs)");
+            if (!token) {
+                router.replace("/(tabs)/home");
             } else {
                 router.replace("/(auth)/login");
             }

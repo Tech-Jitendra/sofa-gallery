@@ -8,7 +8,7 @@ import {
     Typography
 } from "@/components/ui";
 
-
+console.log("Cart screen rendered");
 export default function Cart() {
 
 
